@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import {HistoryGlobalContext} from '../context/history context/HistoryGlobalState'
 
 const Tracker = () => {
+    const context = useContext(HistoryGlobalContext)
+    const {AddHistory} = context
     const [state, setstate] = useState({balance:Number(localStorage.getItem('balance')),added:null,removed:null})
     useEffect(() => {
+            // console.table(localStorage.getItem('historyList'))
             localStorage.setItem("balance", state.balance);
             setstate({ ...state, balance: localStorage.getItem("balance") })
         
@@ -18,11 +22,15 @@ const Tracker = () => {
 
     const AddBalance = () => {
         var added = document.getElementById('addedBalance').value
-        setstate({...state,balance:Number(localStorage.getItem("balance"))+Number(added)})
+        setstate({ ...state, balance: Number(localStorage.getItem("balance")) + Number(added) })
+        var obj = `+ ${added}`
+        AddHistory(obj)
     }
     const RemoveBalance = () => {
         var removed = document.getElementById('removedBalance').value
-        setstate({...state,balance:Number(localStorage.getItem("balance"))-Number(removed)})
+        setstate({ ...state, balance: Number(localStorage.getItem("balance")) - Number(removed) })
+        var obj = `- ${removed}`;
+        AddHistory(obj)
     }
     return (
         <div className='main-container'>
