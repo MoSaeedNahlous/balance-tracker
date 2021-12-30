@@ -1,3 +1,4 @@
+This is a basic react app that helps you to track your balance/expenses, it's not fully completed, more updates soon!
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
